@@ -37,4 +37,4 @@ Run the following command to start server.
 
 The server starts running and a browser window opens with the react app.
 
-![Image of App](Screenshot from 2019-04-08 01-23-58.png)
+![Image of App](Screenshot.png)
