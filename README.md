@@ -17,11 +17,11 @@ Make sure you have node install on your system.
 
 Change directory to comments-api.
 
-$ `cd comments-api`
+`$ cd comments-api`
 
 Run the folowing command to start server.
 
-$ `npm start`
+`$ npm start`
 
 The API starts running on the server.
 
@@ -29,10 +29,12 @@ Keep the terminal window open and start another terminal.
 
 Change directory to commenting-app.
 
-`cd commenting-app`
+`$ cd commenting-app`
 
 Run the following command to start server.
 
-`npm start`
+`$ npm start`
 
 The server starts running and a browser window opens with the react app.
+
+![Image of App](Screenshot from 2019-04-08 01-23-58.png)
