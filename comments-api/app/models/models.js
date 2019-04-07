@@ -3,7 +3,7 @@ let Schema = mongoose.Schema;
 
 let CommentsSchema = new Schema({
   username: { type: String, required: true },
-  comment: { type: String, required: true },
+  text: { type: String, required: true },
   upvotes: Number,
   downvotes: Number
 });

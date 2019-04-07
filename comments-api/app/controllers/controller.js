@@ -1,14 +1,14 @@
 const Comment = require("../models/models.js");
 
 exports.create = (req, res) => {
-  if (!req.body.comment) {
+  if (!req.body.text) {
     return res.status(400).send({
       message: "Comment cannot be left empty"
     });
   }
   const comment = new Comment({
     username: req.body.username || "Anonymous",
-    comment: req.body.comment,
+    text: req.body.text,
     upvotes: 0,
     downvotes: 0
   });

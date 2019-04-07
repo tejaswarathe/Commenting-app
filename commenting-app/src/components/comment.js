@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import axios from "axios";
 
 class CommentItem extends Component {
   componentDidUpdate(prevProps, prevState) {
-    console.log("prevprops", prevProps);
-    console.log("prestates", prevState);
     if (prevProps.comment !== this.props.comment) {
-      console.log("give PUT request");
-      ////PUT request if changes
+      const commentId = this.props.comment._id;
+      axios.put(
+        `http://localhost:3030/comments/${commentId}`,
+        this.props.comment
+      );
     }
   }
+
   render() {
     return (
       <li className="list-group-item">
@@ -39,6 +42,14 @@ class CommentItem extends Component {
               </button>
               {this.props.comment.downvotes} Downvotes
             </h6>
+          </div>
+          <div className="d-flex flex-column container">
+            <button
+              onClick={() => this.props.onDelete(this.props.comment)}
+              className="d-flex btn btn-danger"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </li>

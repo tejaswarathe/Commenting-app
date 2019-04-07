@@ -18,8 +18,8 @@ class CommentBox extends Component {
 
       this.props.handleAddComment(commentObject);
 
-      e.target.element.name.value = "";
-      e.target.element.text.value = "";
+      e.target.elements.name.value = "";
+      e.target.elements.text.value = "";
     }
   }
 
@@ -31,6 +31,7 @@ class CommentBox extends Component {
           <div className="field">
             <div className="control">
               <input
+                ref="username"
                 type="text"
                 className="form-control"
                 name="name"
@@ -41,6 +42,8 @@ class CommentBox extends Component {
           <div className="field">
             <div className="form-group">
               <textarea
+                ref="text"
+                type="text"
                 className="form-control mt-2"
                 name="text"
                 placeholder="Type your comment here..."
@@ -49,7 +52,7 @@ class CommentBox extends Component {
           </div>
           <div className="field">
             <div className="form-group">
-              <button className="btn btn-primary float-right">
+              <button type="submit" className="btn btn-primary float-right">
                 Post Comment
               </button>
             </div>

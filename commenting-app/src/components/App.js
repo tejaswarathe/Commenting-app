@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CommentBox from "./comment-box";
 import CommentList from "./comments";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
@@ -8,37 +9,48 @@ class App extends Component {
     this.handleAddComment = this.handleAddComment.bind(this);
     this.handleUpvote = this.handleUpvote.bind(this);
     this.handleDownvote = this.handleDownvote.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    //  this.handleUpdateState = this.handleUpdateState.bind(this);
     this.state = {
-      commentslist: [
-        {
-          id: 1,
-          username: "Tejas",
-          text: "this is my comment",
-          upvotes: 0,
-          downvotes: 0
-        },
-        {
-          id: 2,
-          username: "Tejas",
-          text: "this is my comment",
-          upvotes: 0,
-          downvotes: 0
-        }
-      ]
+      commentslist: [],
+      isLoaded: false
     };
   }
 
   componentDidMount() {
-    //HTTP request here to get data
+    axios.get("http://localhost:3030/comments").then(res => {
+      this.setState({
+        isLoaded: true,
+        commentslist: res.data
+      });
+    });
+  }
+
+  printState() {
+    return console.log(this.state.commentslist);
   }
 
   handleAddComment(comment) {
+    axios
+      .post("http://localhost:3030/comments", comment)
+      .then(console.log("comment added succesfully"))
+      .catch(err => console.log(err));
+
     this.setState(prevState => {
       return {
-        commentlist: prevState.commentslist.concat(comment)
+        commentslist: prevState.commentslist.concat(comment)
       };
     });
   }
+
+  /*  handleUpdateState() {
+    console.log(this.state.commentslist);
+    this.state(prevState => {
+      return {
+        commentslist: prevState.commentslist
+      };
+    });
+  }*/
 
   handleUpvote(comment) {
     const commentslist = [...this.state.commentslist];
@@ -55,16 +67,24 @@ class App extends Component {
     commentslist[index].downvotes += 1;
     this.setState({ commentslist });
   }
+  handleDelete(comment) {
+    axios.delete(`http://localhost:3030/comments/${comment._id}`);
+    const commentslist = [...this.state.commentslist];
+    const index = commentslist.indexOf(comment);
+    commentslist.splice(index, 1);
+    return this.setState({ commentslist });
+  }
 
   render() {
     return (
       <div className="App container">
-        <CommentBox />
+        <CommentBox handleAddComment={this.handleAddComment} />
         <CommentList
           commentslist={this.state.commentslist}
-          handleAddComment={this.handleAddComment}
           onUpvote={this.handleUpvote}
           onDownvote={this.handleDownvote}
+          onDelete={this.handleDelete}
+          //    onUpdateState={this.handleUpdateState}
         />
       </div>
     );
