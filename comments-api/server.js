@@ -7,7 +7,9 @@ let Comment = require("./app/models/models");
 
 mongoose
   .connect(
-    "mongodb+srv://rentomojo-task:qwertyuiop@comments-data-gnqah.mongodb.net/test?retryWrites=true",
+    process.env.MONGODB_URI ||
+      process.env.MONGODB_JADE_URI ||
+      "mongodb+srv://rentomojo-task:qwertyuiop@comments-data-gnqah.mongodb.net/test?retryWrites=true",
     { useNewUrlParser: true }
   )
   .then(() => {

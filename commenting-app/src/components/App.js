@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3030/comments").then(res => {
+    axios.get("https://commentingapp.herokuapp.com/comments").then(res => {
       this.setState({
         isLoaded: true,
         commentslist: res.data
@@ -32,7 +32,7 @@ class App extends Component {
 
   handleAddComment(comment) {
     axios
-      .post("http://localhost:3030/comments", comment)
+      .post("https://commentingapp.herokuapp.com/comments", comment)
       .then(console.log("comment added succesfully"))
       .catch(err => console.log(err));
 
@@ -68,7 +68,7 @@ class App extends Component {
     this.setState({ commentslist });
   }
   handleDelete(comment) {
-    axios.delete(`http://localhost:3030/comments/${comment._id}`);
+    axios.delete(`https://commentingapp.herokuapp.com/comments/${comment._id}`);
     const commentslist = [...this.state.commentslist];
     const index = commentslist.indexOf(comment);
     commentslist.splice(index, 1);

@@ -7,7 +7,7 @@ class CommentItem extends Component {
     if (prevProps.comment !== this.props.comment) {
       const commentId = this.props.comment._id;
       axios.put(
-        `http://localhost:3030/comments/${commentId}`,
+        `https://commentingapp.herokuapp.com/comments/${commentId}`,
         this.props.comment
       );
     }
