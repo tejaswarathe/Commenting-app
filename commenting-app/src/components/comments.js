@@ -5,7 +5,7 @@ class CommentList extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       /// A bug to fix here
-      console.log(this.props.commentslist);
+      console.log("---");
     }
   }
   render() {
