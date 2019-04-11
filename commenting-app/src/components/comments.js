@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import CommentItem from "./comment";
 
 class CommentList extends Component {
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      /// A bug to fix here
-      console.log("---");
-    }
-  }
   render() {
     return (
       <div className="container list-group list-group-flush">

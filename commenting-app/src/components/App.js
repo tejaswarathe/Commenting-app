@@ -10,7 +10,7 @@ class App extends Component {
     this.handleUpvote = this.handleUpvote.bind(this);
     this.handleDownvote = this.handleDownvote.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    //  this.handleUpdateState = this.handleUpdateState.bind(this);
+
     this.state = {
       commentslist: [],
       isLoaded: false
@@ -18,22 +18,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("https://commentingapp.herokuapp.com/comments").then(res => {
-      this.setState({
-        isLoaded: true,
-        commentslist: res.data
+    setInterval(() => {
+      axios.get("https://commentingapp.herokuapp.com/comments").then(res => {
+        this.setState({
+          isLoaded: true,
+          commentslist: res.data
+        });
       });
-    });
-  }
-
-  printState() {
-    return console.log(this.state.commentslist);
+      console.log("refresh");
+    }, 2000);
   }
 
   handleAddComment(comment) {
     axios
       .post("https://commentingapp.herokuapp.com/comments", comment)
-      .then(console.log("comment added succesfully"))
+      .then(res => console.log(`comment added succesfully`))
       .catch(err => console.log(err));
 
     this.setState(prevState => {
@@ -42,15 +41,6 @@ class App extends Component {
       };
     });
   }
-
-  /*  handleUpdateState() {
-    console.log(this.state.commentslist);
-    this.state(prevState => {
-      return {
-        commentslist: prevState.commentslist
-      };
-    });
-  }*/
 
   handleUpvote(comment) {
     const commentslist = [...this.state.commentslist];
@@ -77,14 +67,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container">
+      <div className="App container-fluid">
         <CommentBox handleAddComment={this.handleAddComment} />
         <CommentList
           commentslist={this.state.commentslist}
           onUpvote={this.handleUpvote}
           onDownvote={this.handleDownvote}
           onDelete={this.handleDelete}
-          //    onUpdateState={this.handleUpdateState}
         />
       </div>
     );
