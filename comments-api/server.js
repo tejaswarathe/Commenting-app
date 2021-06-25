@@ -9,7 +9,7 @@ mongoose
   .connect(
     process.env.MONGODB_URI ||
       process.env.MONGODB_JADE_URI ||
-      "mongodb+srv://rentomojo-task:qwertyuiop@comments-data-gnqah.mongodb.net/test?retryWrites=true",
+      "mongodb+srv://twarathe@es.iitr.ac.in:5$nKhkmjhPrgKJt7@comments-data-gnqah.mongodb.net/test?retryWrites=true",
     { useNewUrlParser: true }
   )
   .then(() => {
